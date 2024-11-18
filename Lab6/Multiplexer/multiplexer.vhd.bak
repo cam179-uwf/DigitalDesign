@@ -1,0 +1,36 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity multiplexer is
+	port (
+		S: in std_logic_vector(2 downto 0);
+		Data,R0,R1,R2,R3 : buffer std_logic_vector(7 downto 0);
+		Output : out std_logic_vector(7 downto 0)
+	);
+end multiplexer;
+
+architecture behaviour of multiplexer is
+begin
+	process (S, Data, R0, R1, R2, R3)
+	begin
+		case S is
+			when "000" =>
+				Output <= R0;
+			when "001" =>
+				Output <= R1;
+			when "010" =>
+				Output <= R2;
+			when "011" =>
+				Output <= R3;
+			when "100" =>
+				Output <= Data;
+			when "101" =>
+				Output <= Data;
+			when "110" =>
+				Output <= Data;
+			when "111" =>
+				Output <= Data;
+		end case;
+	end process;
+end behaviour;

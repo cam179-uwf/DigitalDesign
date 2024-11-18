@@ -1,0 +1,10 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY bcd_10bit_decoder IS
+	PORT (
+		A,B,C,D							: IN STD_LOGIC;
+		E,F,G,H,I,J,K,L,M,N,O,P		: OUT STD_LOGIC
+		);
+END bcd_10bit_decoder;

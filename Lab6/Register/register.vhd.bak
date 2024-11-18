@@ -1,0 +1,9 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity reg is
+	port (
+		S : in std_logic;
+		V : in std_logic_vector(7 downto 0);
+	);

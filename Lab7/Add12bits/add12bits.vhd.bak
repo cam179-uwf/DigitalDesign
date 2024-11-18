@@ -1,0 +1,24 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY add8bits IS
+        PORT (
+                A : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+                B : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+                Cin : IN STD_LOGIC;
+                Sum : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+                Cout : OUT STD_LOGIC
+        );
+END add8bits;
+
+ARCHITECTURE behaviour OF add8bits IS
+        SIGNAL Total : STD_LOGIC_VECTOR(8 DOWNTO 0);
+BEGIN
+        PROCESS(A, B, Cin, Total)
+        BEGIN
+                Total <= ('0' & A) + ('0' & B) + Cin;
+                Sum <= Total(7 DOWNTO 0);
+                Cout <= Total(8);
+        END PROCESS;
+END behaviour;

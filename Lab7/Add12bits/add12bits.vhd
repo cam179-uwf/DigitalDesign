@@ -1,0 +1,24 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY add12bits IS
+  PORT (
+	 A : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
+	 B : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
+	 Cin : IN STD_LOGIC;
+	 Sum : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
+	 Cout : OUT STD_LOGIC
+  );
+END add12bits;
+
+ARCHITECTURE behaviour OF add12bits IS
+  SIGNAL Total : STD_LOGIC_VECTOR(12 DOWNTO 0);
+BEGIN
+  PROCESS(A, B, Cin, Total)
+  BEGIN
+	 Total <= ('0' & A) + ('0' & B) + Cin;
+	 Sum <= Total(11 DOWNTO 0);
+	 Cout <= Total(12);
+  END PROCESS;
+END behaviour;
