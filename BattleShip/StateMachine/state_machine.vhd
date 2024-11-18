@@ -79,6 +79,12 @@ BEGIN
 						State <= Turn;
 					WHEN Turn =>
 	
+						IF WhichPlayer = '0' THEN
+							DispMsgSelect <= "001";
+						ELSE
+							DispMsgSelect <= "010";
+						END IF;
+
 						-- IF THE PLAYER HAS FIRED
 						IF Fire = '0' THEN
 							IF (WhichPlayer = '0' AND HorM2 = '1') OR (WhichPlayer = '1' AND HorM1 = '1') THEN
@@ -89,7 +95,7 @@ BEGIN
 						END IF;
 						
 					WHEN Hit =>
-	
+
 						-- dsplay HIT
 						IF (WhichPlayer = '0' AND Cleared2 = '1') OR (WhichPlayer = '1' AND Cleared1 = '1') THEN
 							State <= Win;
@@ -97,18 +103,31 @@ BEGIN
 							WhichPlayer <= NOT WhichPlayer;
 							State <= Turn;
 						END IF;
+
+						DispMsgSelect <= "011";
+						DispToggle <= '1';
 	
 					WHEN Miss =>
 		
 						-- display Miss
 						WhichPlayer <= NOT WhichPlayer;
 						State <= Turn;
+
+						DispMsgSelect <= "100";
+						DispToggle <= '1';
 	
 					WHEN Win =>
 						
 						-- display Win
 						InternalReset <= '0';
 						State <= Start;
+
+						IF WhichPlayer = '0' THEN
+							DispMsgSelect <= "101";
+						ELSE
+							DispMsgSelect <= "110";
+						END IF;
+						DispToggle <= '1';
 	
 				END CASE;
 			END IF;
