@@ -108,39 +108,39 @@ BEGIN
             -- P1W
             ELSIF MsgSelect = "101" THEN
                 
-					IF Seconds MOD 2 = 0 THEN
-						SSH1 <= "0011000"; -- P
-						SSH2 <= "1001111"; -- 1
-						SSH3 <= "1111111"; 
-						SSH4 <= "1111111"; 
-						SSH5 <= "1000001"; -- W
-						SSH6 <= "1000111"; -- W
-					ELSE
-						SSH1 <= (OTHERS => '1');
-						SSH2 <= (OTHERS => '1');
-						SSH3 <= (OTHERS => '1');
-						SSH4 <= (OTHERS => '1');
-						SSH5 <= (OTHERS => '1');
-						SSH6 <= (OTHERS => '1');
-					END IF;
-				-- P2W
+                IF Seconds MOD 2 = 0 THEN
+                    SSH1 <= "0011000"; -- P
+                    SSH2 <= "1001111"; -- 1
+                    SSH3 <= "1111111"; 
+                    SSH4 <= "1111111"; 
+                    SSH5 <= "1000001"; -- W
+                    SSH6 <= "1000111"; -- W
+                ELSE
+                    SSH1 <= (OTHERS => '1');
+                    SSH2 <= (OTHERS => '1');
+                    SSH3 <= (OTHERS => '1');
+                    SSH4 <= (OTHERS => '1');
+                    SSH5 <= (OTHERS => '1');
+                    SSH6 <= (OTHERS => '1');
+                END IF;
+            -- P2W
             ELSIF MsgSelect = "110" THEN
                 
-					IF Seconds MOD 2 = 0 THEN
-						SSH1 <= "0011000"; -- P
-						SSH2 <= "0010010"; -- 2
-						SSH3 <= "1111111"; 
-						SSH4 <= "1111111"; 
-						SSH5 <= "1000001"; -- W
-						SSH6 <= "1000111"; -- W
-					ELSE
-						SSH1 <= (OTHERS => '1');
-						SSH2 <= (OTHERS => '1');
-						SSH3 <= (OTHERS => '1');
-						SSH4 <= (OTHERS => '1');
-						SSH5 <= (OTHERS => '1');
-						SSH6 <= (OTHERS => '1');
-					END IF;
+                IF Seconds MOD 2 = 0 THEN
+                    SSH1 <= "0011000"; -- P
+                    SSH2 <= "0010010"; -- 2
+                    SSH3 <= "1111111"; 
+                    SSH4 <= "1111111"; 
+                    SSH5 <= "1000001"; -- W
+                    SSH6 <= "1000111"; -- W
+                ELSE
+                    SSH1 <= (OTHERS => '1');
+                    SSH2 <= (OTHERS => '1');
+                    SSH3 <= (OTHERS => '1');
+                    SSH4 <= (OTHERS => '1');
+                    SSH5 <= (OTHERS => '1');
+                    SSH6 <= (OTHERS => '1');
+                END IF;
             ELSE
                 SSH1 <= (OTHERS => '1');
                 SSH2 <= (OTHERS => '1');

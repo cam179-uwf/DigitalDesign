@@ -8,9 +8,6 @@ ENTITY state_machine IS
 		X,Y : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 		CurrentState : BUFFER STD_LOGIC_VECTOR(3 DOWNTO 0);
 		SSH1,SSH2,SSH3,SSH4,SSH5,SSH6 : OUT STD_LOGIC_VECTOR(1 TO 7)
-		-- DispRunning : BUFFER STD_LOGIC := '0';
-		-- DispToggle : BUFFER STD_LOGIC := '0';
-		-- DispMsgSelect : BUFFER STD_LOGIC_VECTOR(2 DOWNTO 0) := (OTHERS => '0')
 	);
 END state_machine;
 
