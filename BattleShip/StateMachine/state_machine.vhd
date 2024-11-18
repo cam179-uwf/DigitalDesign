@@ -7,10 +7,10 @@ ENTITY state_machine IS
 		R,Fire,Clk : IN STD_LOGIC;
 		X,Y : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 		CurrentState : BUFFER STD_LOGIC_VECTOR(3 DOWNTO 0);
-		SSH1,SSH2,SSH3,SSH4,SSH5,SSH6 : OUT STD_LOGIC_VECTOR(1 TO 7);
-		DispRunning : BUFFER STD_LOGIC := '0';
-		DispToggle : BUFFER STD_LOGIC := '0';
-		DispMsgSelect : BUFFER STD_LOGIC_VECTOR(2 DOWNTO 0) := (OTHERS => '0')
+		SSH1,SSH2,SSH3,SSH4,SSH5,SSH6 : OUT STD_LOGIC_VECTOR(1 TO 7)
+		-- DispRunning : BUFFER STD_LOGIC := '0';
+		-- DispToggle : BUFFER STD_LOGIC := '0';
+		-- DispMsgSelect : BUFFER STD_LOGIC_VECTOR(2 DOWNTO 0) := (OTHERS => '0')
 	);
 END state_machine;
 
@@ -27,9 +27,9 @@ ARCHITECTURE behaviour OF state_machine IS
 	SIGNAL Cleared1 : STD_LOGIC := '0';
 	SIGNAL Cleared2 : STD_LOGIC := '0';
 
-	-- SIGNAL DispRunning : STD_LOGIC := '0';
-	-- SIGNAL DispToggle : STD_LOGIC := '0';
-	-- SIGNAL DispMsgSelect : STD_LOGIC_VECTOR(2 DOWNTO 0) := (OTHERS => '0');
+	SIGNAL DispRunning : STD_LOGIC := '0';
+	SIGNAL DispToggle : STD_LOGIC := '0';
+	SIGNAL DispMsgSelect : STD_LOGIC_VECTOR(2 DOWNTO 0) := (OTHERS => '0');
 
 	COMPONENT board IS
 		PORT (

@@ -12,7 +12,7 @@ ENTITY display IS
 END display;
 
 ARCHITECTURE behaviour OF display IS
-    CONSTANT NumberOfTicksPerSecond : INTEGER := 2;
+    CONSTANT NumberOfTicksPerSecond : INTEGER := 50e6;
 
     SIGNAL Ticks : INTEGER := 0;
     SIGNAL Seconds : INTEGER := 0;
@@ -133,12 +133,12 @@ BEGIN
     END PROCESS;
 
     Delay <=
-        1 WHEN MsgSelect = "000" ELSE -- Play
-        1 WHEN MsgSelect = "001" ELSE -- P1
-        1 WHEN MsgSelect = "010" ELSE -- P2
-        1 WHEN MsgSelect = "011" ELSE -- HIT
-        1 WHEN MsgSelect = "100" ELSE -- MISS
-        1 WHEN MsgSelect = "101" ELSE -- P1W
-        1 WHEN MsgSelect = "110" ELSE -- P2W
+        4 WHEN MsgSelect = "000" ELSE -- Play
+        0 WHEN MsgSelect = "001" ELSE -- P1
+        0 WHEN MsgSelect = "010" ELSE -- P2
+        4 WHEN MsgSelect = "011" ELSE -- HIT
+        4 WHEN MsgSelect = "100" ELSE -- MISS
+        4 WHEN MsgSelect = "101" ELSE -- P1W
+        4 WHEN MsgSelect = "110" ELSE -- P2W
         0;
 END behaviour;

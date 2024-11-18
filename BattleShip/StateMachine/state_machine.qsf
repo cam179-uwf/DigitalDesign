@@ -38,7 +38,7 @@
 
 
 set_global_assignment -name FAMILY "Cyclone V"
-set_global_assignment -name DEVICE 5CGXFC7C7F23C8
+set_global_assignment -name DEVICE 5CSEMA5F31C6
 set_global_assignment -name TOP_LEVEL_ENTITY state_machine
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 23.1STD.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "15:21:18  NOVEMBER 16, 2024"
@@ -63,4 +63,62 @@ set_global_assignment -name VHDL_FILE ../Display/display.vhd
 set_global_assignment -name VHDL_FILE ../Board/board.vhd
 set_global_assignment -name VHDL_FILE state_machine.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform.vwf
+set_global_assignment -name BOARD "DE1-SoC Board"
+set_location_assignment PIN_AF14 -to Clk
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_location_assignment PIN_AB12 -to X[0]
+set_location_assignment PIN_AC12 -to X[1]
+set_location_assignment PIN_AF9 -to X[2]
+set_location_assignment PIN_AF10 -to X[3]
+set_location_assignment PIN_AD11 -to Y[0]
+set_location_assignment PIN_AD12 -to Y[1]
+set_location_assignment PIN_AE11 -to Y[2]
+set_location_assignment PIN_AC9 -to Y[3]
+set_location_assignment PIN_Y16 -to Fire
+set_location_assignment PIN_AA14 -to R
+set_location_assignment PIN_V16 -to CurrentState[0]
+set_location_assignment PIN_W16 -to CurrentState[1]
+set_location_assignment PIN_V17 -to CurrentState[2]
+set_location_assignment PIN_V18 -to CurrentState[3]
+set_location_assignment PIN_V25 -to SSH1[1]
+set_location_assignment PIN_AA28 -to SSH1[2]
+set_location_assignment PIN_Y27 -to SSH1[3]
+set_location_assignment PIN_AB27 -to SSH1[4]
+set_location_assignment PIN_AB26 -to SSH1[5]
+set_location_assignment PIN_AA26 -to SSH1[6]
+set_location_assignment PIN_AA25 -to SSH1[7]
+set_location_assignment PIN_AA24 -to SSH2[1]
+set_location_assignment PIN_Y23 -to SSH2[2]
+set_location_assignment PIN_Y24 -to SSH2[3]
+set_location_assignment PIN_W22 -to SSH2[4]
+set_location_assignment PIN_W24 -to SSH2[5]
+set_location_assignment PIN_V23 -to SSH2[6]
+set_location_assignment PIN_W25 -to SSH2[7]
+set_location_assignment PIN_AD26 -to SSH3[1]
+set_location_assignment PIN_AC27 -to SSH3[2]
+set_location_assignment PIN_AD25 -to SSH3[3]
+set_location_assignment PIN_AC25 -to SSH3[4]
+set_location_assignment PIN_AB28 -to SSH3[5]
+set_location_assignment PIN_AB25 -to SSH3[6]
+set_location_assignment PIN_AB22 -to SSH3[7]
+set_location_assignment PIN_AB23 -to SSH4[1]
+set_location_assignment PIN_AE29 -to SSH4[2]
+set_location_assignment PIN_AD29 -to SSH4[3]
+set_location_assignment PIN_AC28 -to SSH4[4]
+set_location_assignment PIN_AD30 -to SSH4[5]
+set_location_assignment PIN_AC29 -to SSH4[6]
+set_location_assignment PIN_AC30 -to SSH4[7]
+set_location_assignment PIN_AJ29 -to SSH5[1]
+set_location_assignment PIN_AH29 -to SSH5[2]
+set_location_assignment PIN_AH30 -to SSH5[3]
+set_location_assignment PIN_AG30 -to SSH5[4]
+set_location_assignment PIN_AF29 -to SSH5[5]
+set_location_assignment PIN_AF30 -to SSH5[6]
+set_location_assignment PIN_AD27 -to SSH5[7]
+set_location_assignment PIN_AE26 -to SSH6[1]
+set_location_assignment PIN_AE27 -to SSH6[2]
+set_location_assignment PIN_AE28 -to SSH6[3]
+set_location_assignment PIN_AG27 -to SSH6[4]
+set_location_assignment PIN_AF28 -to SSH6[5]
+set_location_assignment PIN_AG28 -to SSH6[6]
+set_location_assignment PIN_AH28 -to SSH6[7]
