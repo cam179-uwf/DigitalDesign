@@ -40,12 +40,12 @@ BEGIN
         IF R = '0' THEN
             Running <= '0';
 
-            SSH1 <= (OTHERS => '0');
-            SSH2 <= (OTHERS => '0');
-            SSH3 <= (OTHERS => '0');
-            SSH4 <= (OTHERS => '0');
-            SSH5 <= (OTHERS => '0');
-            SSH6 <= (OTHERS => '0');
+            SSH1 <= (OTHERS => '1');
+            SSH2 <= (OTHERS => '1');
+            SSH3 <= (OTHERS => '1');
+            SSH4 <= (OTHERS => '1');
+            SSH5 <= (OTHERS => '1');
+            SSH6 <= (OTHERS => '1');
         ELSIF rising_edge(Clk) THEN
 
             IF Toggle = '1' THEN
@@ -57,77 +57,97 @@ BEGIN
 
             -- PLAY
             IF MsgSelect = "000" THEN
-                SSH1 <= "1100111"; -- P
-                SSH2 <= "0001110"; -- L
-                SSH3 <= "1110111"; -- A
-                SSH4 <= "0100111"; -- Y
-                SSH5 <= "0000000";
-                SSH6 <= "0000000";
+                SSH1 <= "0011000"; -- P
+                SSH2 <= "1110001"; -- L
+                SSH3 <= "0001000"; -- A
+                SSH4 <= "1011000"; -- Y
+                SSH5 <= "1111111";
+                SSH6 <= "1111111";
             -- P1
             ELSIF MsgSelect = "001" THEN
-                SSH1 <= "1100111"; -- P
-                SSH2 <= "1110000"; -- 1
-                SSH3 <= "0000000";
-                SSH4 <= "0000000";
-                SSH5 <= "0000000";
-                SSH6 <= "0000000";
+                SSH1 <= "0011000"; -- P
+                SSH2 <= "1001111"; -- 1
+                SSH3 <= "1111111";
+                SSH4 <= "1111111";
+                SSH5 <= "1111111";
+                SSH6 <= "1111111";
             -- P2
             ELSIF MsgSelect = "010" THEN
-                SSH1 <= "1100111"; -- P
-                SSH2 <= "1101101"; -- 2
-                SSH3 <= "0000000";
-                SSH4 <= "0000000";
-                SSH5 <= "0000000";
-                SSH6 <= "0000000";
+                SSH1 <= "0011000"; -- P
+                SSH2 <= "0010010"; -- 2
+                SSH3 <= "1111111";
+                SSH4 <= "1111111";
+                SSH5 <= "1111111";
+                SSH6 <= "1111111";
             -- HIT
             ELSIF MsgSelect = "011" THEN
-                SSH1 <= "0110111"; -- H
-                SSH2 <= "1001000"; -- I
-                SSH3 <= "1001110"; -- I
-                SSH4 <= "1000000"; -- T
-                SSH5 <= "1000110"; -- T
-                SSH6 <= "0000000";
+                SSH1 <= "1111111"; 
+                SSH2 <= "1001000"; -- H
+                SSH3 <= "0110111"; -- I
+                SSH4 <= "0110001"; -- I
+                SSH5 <= "0111111"; -- T
+                SSH6 <= "0111001"; -- T
             -- MISS
             ELSIF MsgSelect = "100" THEN
 
                 IF Seconds MOD 2 = 0 THEN
-                    SSH1 <= "1110110"; -- M
-                    SSH2 <= "1110000"; -- M
-                    SSH3 <= "1001000"; -- I
-                    SSH4 <= "1001110"; -- I
-                    SSH5 <= "1011011"; -- S
-                    SSH6 <= "1011011"; -- S
+                    SSH1 <= "0001001"; -- M
+                    SSH2 <= "0001111"; -- M
+                    SSH3 <= "0110111"; -- I
+                    SSH4 <= "0110001"; -- I
+                    SSH5 <= "0100100"; -- S
+                    SSH6 <= "0100100"; -- S
                 ELSE
-                    SSH1 <= (OTHERS => '0');
-                    SSH2 <= (OTHERS => '0');
-                    SSH3 <= (OTHERS => '0');
-                    SSH4 <= (OTHERS => '0');
-                    SSH5 <= (OTHERS => '0');
-                    SSH6 <= (OTHERS => '0');
+                    SSH1 <= (OTHERS => '1');
+                    SSH2 <= (OTHERS => '1');
+                    SSH3 <= (OTHERS => '1');
+                    SSH4 <= (OTHERS => '1');
+                    SSH5 <= (OTHERS => '1');
+                    SSH6 <= (OTHERS => '1');
                 END IF;
             -- P1W
             ELSIF MsgSelect = "101" THEN
-                SSH1 <= "1100111"; -- P
-                SSH2 <= "1110000"; -- 1
-                SSH3 <= "0111110"; -- W
-                SSH4 <= "0111000"; -- W
-                SSH5 <= "0000000";
-                SSH6 <= "0000000";
-            -- P2W
+                
+					IF Seconds MOD 2 = 0 THEN
+						SSH1 <= "0011000"; -- P
+						SSH2 <= "1001111"; -- 1
+						SSH3 <= "1111111"; 
+						SSH4 <= "1111111"; 
+						SSH5 <= "1000001"; -- W
+						SSH6 <= "1000111"; -- W
+					ELSE
+						SSH1 <= (OTHERS => '1');
+						SSH2 <= (OTHERS => '1');
+						SSH3 <= (OTHERS => '1');
+						SSH4 <= (OTHERS => '1');
+						SSH5 <= (OTHERS => '1');
+						SSH6 <= (OTHERS => '1');
+					END IF;
+				-- P2W
             ELSIF MsgSelect = "110" THEN
-                SSH1 <= "1100111"; -- P
-                SSH2 <= "1101101"; -- 2
-                SSH3 <= "0111110"; -- W
-                SSH4 <= "0111000"; -- W
-                SSH5 <= "0000000";
-                SSH6 <= "0000000";
+                
+					IF Seconds MOD 2 = 0 THEN
+						SSH1 <= "0011000"; -- P
+						SSH2 <= "0010010"; -- 2
+						SSH3 <= "1111111"; 
+						SSH4 <= "1111111"; 
+						SSH5 <= "1000001"; -- W
+						SSH6 <= "1000111"; -- W
+					ELSE
+						SSH1 <= (OTHERS => '1');
+						SSH2 <= (OTHERS => '1');
+						SSH3 <= (OTHERS => '1');
+						SSH4 <= (OTHERS => '1');
+						SSH5 <= (OTHERS => '1');
+						SSH6 <= (OTHERS => '1');
+					END IF;
             ELSE
-                SSH1 <= (OTHERS => '0');
-                SSH2 <= (OTHERS => '0');
-                SSH3 <= (OTHERS => '0');
-                SSH4 <= (OTHERS => '0');
-                SSH5 <= (OTHERS => '0');
-                SSH6 <= (OTHERS => '0');
+                SSH1 <= (OTHERS => '1');
+                SSH2 <= (OTHERS => '1');
+                SSH3 <= (OTHERS => '1');
+                SSH4 <= (OTHERS => '1');
+                SSH5 <= (OTHERS => '1');
+                SSH6 <= (OTHERS => '1');
             END IF;
         END IF;
     END PROCESS;
