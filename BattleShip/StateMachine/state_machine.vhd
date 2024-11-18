@@ -19,7 +19,7 @@ ARCHITECTURE behaviour OF state_machine IS
 	TYPE State_Type IS (Start, Turn, Hit, Miss, Win);
 	SIGNAL State : State_Type := Start;
 	
-	SIGNAL InternalReset : STD_LOGIC := '0';
+	SIGNAL InternalReset : STD_LOGIC := '1';
 
 	SIGNAL WhichPlayer : STD_LOGIC := '0';
 	SIGNAL HorM1 : STD_LOGIC := '0';
@@ -54,64 +54,70 @@ BEGIN
 		WAIT UNTIL Clk'EVENT AND Clk = '1';
 
 		IF R = '0' THEN
-			InternalReset <= '1';
 			State <= Start;
+			DispToggle <= '0';
 		ELSE
-			CASE State IS
-				WHEN Start =>
+			IF DispToggle = '1' THEN
 
-					-- RESET EVERYTHING
-					InternalReset <= '0';
-					WhichPlayer <= '0';
+				IF DispRunning = '1' THEN
+					DispToggle <= '0';
+				END IF;
+				
+			ELSIF DispRunning = '0' AND DispToggle = '0' THEN
 
-					-- DISPLAY STUFF
-					IF DispRunning <= '1' THEN
+				CASE State IS
+					WHEN Start =>
+	
+						-- RESET EVERYTHING
+						InternalReset <= '1';
+						WhichPlayer <= '0';
+	
+						-- DISPLAY A MESSAGE
 						DispMsgSelect <= "000";
-						DispToggle <= '0';
-					ELSIF DispRunning <= '0' AND DispToggle <= '0' THEN
+						DispToggle <= '1';
+
 						State <= Turn;
-					END IF;
-
-					DispToggle <= '1';
-				WHEN Turn =>
-
-					-- IF THE PLAYER HAS FIRED
-					IF Fire = '0' THEN
-						IF (WhichPlayer = '0' AND HorM2 = '1') OR (WhichPlayer = '1' AND HorM1 = '1') THEN
-							State <= Hit;
-						ELSE
-							State <= Miss;
+					WHEN Turn =>
+	
+						-- IF THE PLAYER HAS FIRED
+						IF Fire = '0' THEN
+							IF (WhichPlayer = '0' AND HorM2 = '1') OR (WhichPlayer = '1' AND HorM1 = '1') THEN
+								State <= Hit;
+							ELSE
+								State <= Miss;
+							END IF;
 						END IF;
-					END IF;
-					
-				WHEN Hit =>
-
-					-- dsplay HIT
-					IF (WhichPlayer = '0' AND Cleared2 = '1') OR (WhichPlayer = '1' AND Cleared1 = '1') THEN
-						State <= Win;
-					ELSE
+						
+					WHEN Hit =>
+	
+						-- dsplay HIT
+						IF (WhichPlayer = '0' AND Cleared2 = '1') OR (WhichPlayer = '1' AND Cleared1 = '1') THEN
+							State <= Win;
+						ELSE
+							WhichPlayer <= NOT WhichPlayer;
+							State <= Turn;
+						END IF;
+	
+					WHEN Miss =>
+		
+						-- display Miss
 						WhichPlayer <= NOT WhichPlayer;
 						State <= Turn;
-					END IF;
-
-				WHEN Miss =>
 	
-					-- display Miss
-					WhichPlayer <= NOT WhichPlayer;
-					State <= Turn;
-
-				WHEN Win =>
-					
-					-- display Win
-					State <= Start;
-
-			END CASE;
+					WHEN Win =>
+						
+						-- display Win
+						InternalReset <= '0';
+						State <= Start;
+	
+				END CASE;
+			END IF;
 		END IF;
 	END PROCESS;
 
-	B1:board PORT MAP(NOT WhichPlayer, InternalReset, Fire, X, Y, HorM1, Cleared1);
-	B2:board PORT MAP(WhichPlayer, InternalReset, Fire, X, Y, HorM2, Cleared2);
-	DISP:display PORT MAP(DispToggle, InternalReset, Clk, DispMsgSelect, SSH1, SSH2, SSH3, SSH4, SSH5, SSH6, DispRunning);
+	B1:board PORT MAP(NOT WhichPlayer, R AND InternalReset, Fire OR DispToggle OR DispRunning, X, Y, HorM1, Cleared1);
+	B2:board PORT MAP(WhichPlayer, R AND InternalReset, Fire OR DispToggle OR DispRunning, X, Y, HorM2, Cleared2);
+	DISP:display PORT MAP(DispToggle, R, Clk, DispMsgSelect, SSH1, SSH2, SSH3, SSH4, SSH5, SSH6, DispRunning);
 
 	CurrentState <= "0000" WHEN State = Start ELSE
 		"0001" WHEN State = Turn ELSE
